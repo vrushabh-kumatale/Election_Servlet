@@ -11,5 +11,7 @@ public interface CandidateDao extends AutoCloseable {
 	public List<Candidate> findAll() throws Exception;
 	public int incrementVote(int candidateId) throws Exception;
 	public List<Candidate> findByParty(String givenParty) throws Exception;
+	public List<Candidate> getCandidatewiseVotes() throws Exception;
+
 	public Candidate findById(int id) throws Exception;
 }

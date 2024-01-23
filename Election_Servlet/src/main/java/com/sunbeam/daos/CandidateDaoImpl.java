@@ -107,6 +107,25 @@ public class CandidateDaoImpl extends Dao implements CandidateDao {
 		}
 		return null;
 	}
-	
 
+	@Override
+	public List<Candidate> getCandidatewiseVotes() throws Exception {
+		List<Candidate> list = new ArrayList<>();
+		String sql = "SELECT * FROM candidates ORDER BY votes DESC";
+		try(PreparedStatement stmt = con.prepareStatement(sql)) {
+			try(ResultSet rs = stmt.executeQuery()) {
+				while(rs.next()) {
+					int id = rs.getInt("id");
+					String name = rs.getString("name");
+					String party = rs.getString("party");
+					int votes = rs.getInt("votes");
+					Candidate c = new Candidate(id, name, party, votes);
+					list.add(c);
+
+	}
+	
+	}
+}
+		return list;
+}
 }
