@@ -14,24 +14,24 @@ public class UserDaoImpl extends Dao implements UserDao {
 
 	@Override
 	public User findByEmail(String email) throws Exception {
-		String sql = "select * from users where email=?";
+		String sql = "SELECT * FROM users WHERE email=?";
 		try(PreparedStatement stmt = con.prepareStatement(sql)) {
 			stmt.setString(1, email);
 			try(ResultSet rs = stmt.executeQuery()) {
 				if(rs.next()) {
-					int id =deleteById(rs.getInt("id"));
-					String firstName =rs.getString("first_name");
-					String lastName =rs.getString("last_name");
+					int id = rs.getInt("id");
+					String firstName = rs.getString("first_name");
+					String lastName = rs.getString("last_name");
 					email = rs.getString("email");
 					String password = rs.getString("password");
 					int status = rs.getInt("status");
 					Date birth = rs.getDate("dob");
 					String role = rs.getString("role");
-					 User u = new User(id, firstName, lastName, email, password, birth, status, role);
-					 return u;
+					User u = new User(id, firstName, lastName, email, password, birth, status, role);
+					return u;
 				}
-			}
-		}
+			} // rs.close();
+		} // stmt.close();
 		return null;
 	}
 
