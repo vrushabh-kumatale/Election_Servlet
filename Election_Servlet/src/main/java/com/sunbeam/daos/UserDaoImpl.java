@@ -94,8 +94,9 @@ public class UserDaoImpl extends Dao implements UserDao {
 	public int updateStatus(int userId, boolean voted) throws Exception {
 		String sql = "update users SET status=? where id=?";
 		try(PreparedStatement stmt = con.prepareStatement(sql)) {
-			stmt.setInt(1, userId);
-			stmt.setInt(2, (voted ? 1 : 0));
+			stmt.setInt(1, (voted ? 1 : 0));
+			stmt.setInt(2, userId);
+			
 			int cnt = stmt.executeUpdate();
 			return cnt;
 		}
